@@ -1,0 +1,20 @@
+{
+  "name": "genshen-citlali-skin",
+  "displayName": "茜特拉莉动态皮肤（原神）",
+  "description": "原神茜特拉莉动态皮肤：点击播放大招中文语音与爆发动画，支持切换壁纸，胶囊右键一键卸载。适用于 VSCode / Trae-IDE / CodeX。",
+  "version": "1.0.0",
+  "publisher": "wp666",
+  "icon": "icon.png",
+  "engines": { "vscode": "^1.75.0" },
+  "categories": ["Other"],
+  "keywords": ["genshin", "citlali", "原神", "茜特拉莉", "skin"],
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "repository": { "type": "git", "url": "https://github.com/WPH666-py/Genshen-Citlali-Skin" },
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      { "command": "citlaliSkin.show", "title": "茜特拉莉皮肤：显示", "icon": "$(sparkle)" },
+      { "command": "citlaliSkin.uninstall", "title": "茜特拉莉皮肤：一键卸载", "icon": "$(trash)" }
+    ]
+  }
+}
