@@ -53,7 +53,7 @@
 
 | 想改什么 | 改哪里 |
 | --- | --- |
-| 挂件尺寸（默认 320px） | client.js 中 CSS 的 `.citlali-card` / `.citlali-img` 宽高（特效可按比例缩放） |
+| 挂件宽度（默认 320px） | client.js 中 CSS 的 `.citlali-card` / `.citlali-img` 宽度；高度自动贴合当前壁纸宽高比（上限 560px） |
 | 默认位置（右下角） | `CitlaliWidget` 里 `pos` 的初始 x/y |
 | 语音台词 | `client.js` 中 `VOICE_TEXT`；替换语音见下 |
 | 技能名文案 | `client.js` 中 `SKILL_TEXT`（默认“元素爆发 · 诸曜饬令”） |
