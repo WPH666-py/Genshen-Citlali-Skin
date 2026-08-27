@@ -29,8 +29,8 @@ const WALL_DEFAULT_URIS = [
 
 const CSS = `
 .citlali-root { position: fixed; z-index: 99990; pointer-events: auto; user-select: none; -webkit-user-select: none; touch-action: none; }
-.citlali-card { position: relative; width: 320px; height: 320px; cursor: pointer; border-radius: 30px; }
-.citlali-img { display: block; width: 320px; height: 320px; object-fit: cover; border-radius: 30px;
+.citlali-card { position: relative; width: 320px; height: auto; cursor: pointer; border-radius: 30px; }
+.citlali-img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 30px;
   border: 1px solid rgba(240, 170, 252, .45); background: #160b2e;
   box-shadow: 0 14px 48px rgba(0, 0, 0, .5), 0 0 0 1px rgba(226, 168, 255, .14) inset;
   animation: citlali-bob 3.6s ease-in-out infinite; }
@@ -122,11 +122,14 @@ return {
     const SKILL_TEXT = '元素爆发 · 诸曜饬令'
     const PARTICLE_COUNT = 18
     const STAR_COUNT = 10
+    const CARD_W = 320
+    const MAX_CARD_H = 560
     const WALLS = [
-      { name: '壁纸·其一', uri: WALL_DEFAULT_URIS[0] },
-      { name: '壁纸·其二', uri: WALL_DEFAULT_URIS[1] },
-      { name: '壁纸·其三', uri: WALL_DEFAULT_URIS[2] },
+      { name: '壁纸·其一', uri: WALL_DEFAULT_URIS[0], aspect: 1159 / 800 },
+      { name: '壁纸·其二', uri: WALL_DEFAULT_URIS[1], aspect: 877 / 600 },
+      { name: '壁纸·其三', uri: WALL_DEFAULT_URIS[2], aspect: 1850 / 1152 },
     ]
+    const cardHeightFor = (aspect) => Math.min(MAX_CARD_H, Math.round(CARD_W * aspect))
     let disposeSlot = null
 
     const uninstallAll = async () => {
@@ -141,6 +144,7 @@ return {
       // 若加载了 host.js 全画质模式，自动切换为 /citlali-skin/ 路由素材。
       const [assets, setAssets] = React.useState({ walls: WALLS.map((w) => w.uri), burst: BURST_DATA_URI })
       const [wallIndex, setWallIndex] = React.useState(0)
+      const [cardH, setCardH] = React.useState(() => cardHeightFor(WALLS[0].aspect))
       const [failedWalls, setFailedWalls] = React.useState({})
       const [bursting, setBursting] = React.useState(false)
       const [burstKey, setBurstKey] = React.useState(0)
@@ -148,8 +152,8 @@ return {
       const [menu, setMenu] = React.useState(null)
       const [confirmUninstall, setConfirmUninstall] = React.useState(false)
       const [pos, setPos] = React.useState(() => ({
-        x: Math.max(8, window.innerWidth - 400),
-        y: Math.max(8, window.innerHeight - 540),
+        x: Math.max(8, window.innerWidth - 360),
+        y: Math.max(8, window.innerHeight - 620),
       }))
       const posRef = React.useRef(pos)
       posRef.current = pos
@@ -248,6 +252,7 @@ return {
             items.push(menuItem(WALLS[i].name + (wallIndex === i ? ' ✓' : ''), () => {
               setMenu(null)
               setWallIndex(idx)
+              setCardH(cardHeightFor(WALLS[idx].aspect))
               setFailedWalls((prev) => {
                 const next = Object.assign({}, prev)
                 delete next[idx]
@@ -324,6 +329,7 @@ return {
       },
         React.createElement('div', {
           className: 'citlali-card' + (bursting ? ' citlali-is-bursting' : ''),
+          style: { width: CARD_W, height: cardH },
           onClick: () => { if (!movedRef.current) triggerBurst() },
           onContextMenu: (e) => openMenu(e, 'card'),
           title: '点击：释放元素爆发「诸曜饬令」；右键：菜单（当前壁纸：' + WALLS[wallIndex].name + '）',
@@ -333,6 +339,10 @@ return {
             src: assets.walls[wallIndex],
             draggable: false,
             alt: '茜特拉莉',
+            onLoad: (e) => {
+              const el = e.currentTarget
+              if (el.naturalWidth > 0) setCardH(cardHeightFor(el.naturalHeight / el.naturalWidth))
+            },
             onError: () => setFailedWalls((prev) => {
               const next = Object.assign({}, prev)
               next[wallIndex] = true
