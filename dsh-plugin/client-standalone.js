@@ -125,8 +125,8 @@ return {
     const CARD_W = 320
     const MAX_CARD_H = 560
     const WALLS = [
-      { name: '壁纸·其一', uri: WALL_DEFAULT_URIS[0], aspect: 1159 / 800 },
       { name: '壁纸·其二', uri: WALL_DEFAULT_URIS[1], aspect: 877 / 600 },
+      { name: '壁纸·其一', uri: WALL_DEFAULT_URIS[0], aspect: 1159 / 800 },
       { name: '壁纸·其三', uri: WALL_DEFAULT_URIS[2], aspect: 1850 / 1152 },
     ]
     const cardHeightFor = (aspect) => Math.min(MAX_CARD_H, Math.round(CARD_W * aspect))

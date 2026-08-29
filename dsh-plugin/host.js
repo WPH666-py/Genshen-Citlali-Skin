@@ -8,11 +8,11 @@
 // 唯一需要修改的：把 ASSET_DIR 改成素材文件夹在你机器上的
 // 绝对路径（Windows 用正斜杠或双反斜杠）。
 // ============================================================
-const ASSET_DIR = 'D:/projects-py/原始系列皮肤插件/茜特拉莉动态皮肤插件（独立版）/素材'
+const ASSET_DIR = 'D:/projects-py/Genshen-Citlali-Skin/dsh-plugin/素材'
 const MAX_BYTES = 8 * 1024 * 1024
 const ROUTES = [
-  { route: '/citlali-skin/wall1.png', file: '茜特拉莉.png', type: 'image/png' },
-  { route: '/citlali-skin/wall2.jpg', file: '茜特拉莉-壁纸2.jpg', type: 'image/jpeg' },
+  { route: '/citlali-skin/wall1.png', file: '茜特拉莉-壁纸2.jpg', type: 'image/jpeg' },
+  { route: '/citlali-skin/wall2.jpg', file: '茜特拉莉.png', type: 'image/png' },
   { route: '/citlali-skin/wall3.jpg', file: '茜特拉莉-壁纸3.jpg', type: 'image/jpeg' },
   { route: '/citlali-skin/burst.mp3', file: '语音-元素爆发·灭口交给你们俩了.mp3', type: 'audio/ogg' },
 ]
